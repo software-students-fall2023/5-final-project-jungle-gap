@@ -9,6 +9,9 @@ pytest = "*"
 pytest-flask = "*"
 pylint = "*"
 black = "*"
+pymongo = "*"
+flask-pymongo = "*"
+mongomock = "*"
 
 [dev-packages]
 

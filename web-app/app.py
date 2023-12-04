@@ -1,10 +1,7 @@
-from flask import Flask, jsonify
+from src import create_app
+from config import DevelopmentConfig
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return jsonify({"message": "Welcome to the Personal Finance Tracker!"})
+app = create_app(DevelopmentConfig)
 
 if __name__ == '__main__':
     app.run(debug=True)
