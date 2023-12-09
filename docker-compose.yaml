@@ -1,20 +1,33 @@
-version: '3'
+version: "3"
 services:
   db:
     image: mongo
     container_name: my_mongo_db
-    ports: 
+    ports:
       - "27017:27017"
-    
+
   webapp:
     build: ./web-app
     image: web_app
     container_name: my_web_app
     volumes:
       - ./web-app:/usr/src/app
+      - ./machine-learning-client/images_files:/images_files
     ports:
       - "6001:5000"
     depends_on:
       - db
-    stdin_open: true 
+    stdin_open: true
     tty: true
+
+  mlclient:
+    build: ./machine-learning-client
+    image: ml_client
+    container_name: my_ml_client
+    volumes:
+      - ./machine-learning-client:/usr/src/app
+      - ./machine-learning-client/images_files:/images_files
+    ports:
+      - "7001:5000"
+    depends_on:
+      - db

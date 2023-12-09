@@ -4,13 +4,31 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-pytest = "*"
-pytest-flask = "*"
+speechrecognition = "*"
+textblob = "*"
+pydub = "*"
 pylint = "*"
+tomli = "*"
+typing-extensions = "*"
+pymongo = "*"
+flask = "*"
+dill = "*"
 black = "*"
+python-dotenv = "*"
+passlib = "*"
+pytest = "*"
+sounddevice = "*"
+coverage = "*"
+exceptiongroup = "*"
+flask-cors = "*"
+mongomock = "*"
+requests = "*"
+requests-mock = "*"
+pytest-mock = "*"
 
 [dev-packages]
+pylint = "*"
+black = "*"
 
 [requires]
 python_version = "3.12"

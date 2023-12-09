@@ -5,6 +5,9 @@
 .vscode/
 .vscode/settings.json
 
+# audio files
+machine-learning-client/images_files/
+
 # emacs backups
 *~
 
@@ -17,6 +20,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+*.bat
 .Python
 build/
 develop-eggs/
