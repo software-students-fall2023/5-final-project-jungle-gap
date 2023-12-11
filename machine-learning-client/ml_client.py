@@ -34,3 +34,13 @@ def recognition_image(file_path):
 
     return file_path
 
+
+# def analyze_sentiment(text):
+#     """
+#     Sentiment analysis
+#     """
+#     if text == "N/A":
+#         # Handle the case where the recognizer does not understand the audio
+#         return SentimentResult(polarity=-2.0, subjectivity=None)
+#     # analysis = TextBlob(text)
+#     return ""
