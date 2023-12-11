@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<div class="upload-container">
+    <h1>Face Recognition Service</h1>
+    <h3>Take a Picture</h3>
+
+
+    <div class="audio-capture-container">
+        <video id="video" width="300" height="180" autoplay></video>
+        <canvas id="canvas" width="300" height="180"></canvas>
+    </div>
+    <div class="audio-capture-container">
+        <button id="to-shoot">turn the camera</button>
+        <button id="save-photo">recognition</button>
+    </div>
+
+
+
+</div>
+<div class="upload-container" style="margin-top: 8px;padding: 2px;">
+    <div id="response-message"></div>
+</div>
+<div class="upload-container" style="margin-top: 8px;">
+    <h3>Upload a picture</h3>
+
+    <form id="upload-form" method="POST" action="/api/upload_image" enctype="multipart/form-data">
+        <label for="image-file" class="file-input-label">Choose File</label>
+        <input type="file" name="image" id="image-file" accept="image/*" style="display:none;" />
+        <span id="file-chosen">No file chosen</span>
+        <br>
+        <button type="submit" class="submit-btn">Upload</button>
+    </form>
+
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+    {% for message in messages %}
+    <p class="error">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='image_capture.js') }}"></script>
+{% endblock %}

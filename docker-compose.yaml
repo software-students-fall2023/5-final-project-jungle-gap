@@ -18,3 +18,15 @@ services:
       - db
     stdin_open: true 
     tty: true
+
+  mlclient:
+    build: ./machine-learning-client
+    image: ml_client
+    container_name: my_ml_client
+    volumes:
+      - ./machine-learning-client:/usr/src/app
+      - ./machine-learning-client/images_files:/images_files
+    ports:
+      - "7001:5000"
+    depends_on:
+      - db
