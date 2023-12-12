@@ -13,6 +13,10 @@ mongomock = "*"
 flask-cors = "*"
 pymongo = "*"
 passlib = "*"
+opencv-python = "*"
+pylance = "*"
+requests = "*"
+face-recognition = "*"
 
 [dev-packages]
 

@@ -3,16 +3,14 @@ machine learning client backend
 This file contains API for the web-app backend usage
 """
 
-import logging
+
 import os
-import subprocess
 
 # import random
 import traceback
 import mongomock
 from flask import (
     Flask,
-    make_response,
     request,
     jsonify,
     send_file,
@@ -20,7 +18,7 @@ from flask import (
 )
 from flask_cors import CORS
 import pymongo
-from ml_client import recognition_image  # , analyze_sentiment
+from ml_client import recognition_image
 
 app = Flask(__name__)
 CORS(app)  # Stop the security protection
@@ -52,7 +50,6 @@ def upload_image():
     web-app's backend will call this API.
     """
     try:
-        print("mlclient /upload request=", request.files)
         if "file" not in request.files:
             print("No image file in request")
             return jsonify({"error": "No image file"}), 400
@@ -74,7 +71,6 @@ def upload_image():
 
         # This is the actual machine learning work
         file_path = recognition_image(image_path)  # recognition image
-        # sentiment = analyze_sentiment(transcript)  # Sentiment
 
         if user_id:  # If the user is logged in
             # Store user id and file in the database

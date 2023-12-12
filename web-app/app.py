@@ -114,7 +114,7 @@ def js_upload_image():
     user_id = session["user"]["_id"] if "logged_in" in session else None
     data = {"user_id": user_id} if user_id else {}
 
-    upload_dir = "images_files"  #
+    upload_dir = "images_files"
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
 

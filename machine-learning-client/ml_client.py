@@ -15,7 +15,6 @@ def recognition_image(file_path):
     """
     recognition the given image file
     """
-    # r = sr.Recognizer()
 
     print("[recognition_image] file_path=", file_path)
 
@@ -33,14 +32,3 @@ def recognition_image(file_path):
     cv2.imwrite(file_path, img)
 
     return file_path
-
-
-# def analyze_sentiment(text):
-#     """
-#     Sentiment analysis
-#     """
-#     if text == "N/A":
-#         # Handle the case where the recognizer does not understand the audio
-#         return SentimentResult(polarity=-2.0, subjectivity=None)
-#     # analysis = TextBlob(text)
-#     return ""
