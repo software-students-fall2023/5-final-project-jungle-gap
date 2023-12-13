@@ -68,6 +68,20 @@ def homescreen_view():
     """
     return render_template("index.html")
 
+@app.route("/archive")
+@login_required
+def archive_view():
+    """
+    View images generated for the user before
+    """
+    server_url = os.environ.get("SERVER_URL", "http://127.0.0.1")
+    user_images = db.history.find({
+        "user_id": session["user"]["_id"]
+    }) # Find the images in the database that have user's id
+    app.logger.warning(user_images)
+    images = list(map(lambda user_image: {"filename": user_image["filename"]}, user_images))
+    return render_template("archive.html",images=images, server_url=server_url)
+    
 
 # @app.route("/recognition")
 # @login_required

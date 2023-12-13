@@ -12,7 +12,7 @@
       <a class="bl" href="/">Home</a>
       {% if session.logged_in %}
       <span style="margin-left: 400px;">Welcome, {{ session.user.username }}!</span>
-      <!-- <a href="/recognition">Recognition Result</a> -->
+      <a href="/archive">Archive</a>
       <form method="POST" action="/user/signout" style="display: inline;">
         <button type="submit" class="signout-btn">Sign Out</button>
       </form>

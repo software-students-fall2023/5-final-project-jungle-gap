@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<div class="archive-container">
+  <h1>Images Archive</h1>
+  {% for image in images %}
+  <div class="image-container">
+    <image src= "{{server_url}}:7001//image/{{image.filename}}">
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
