@@ -3,9 +3,7 @@ machine learning client backend
 This file contains API for the web-app backend usage
 """
 
-
 import os
-
 # import random
 import traceback
 import mongomock
@@ -43,7 +41,7 @@ def uploaded_file(filename):
     return send_from_directory("/images_files", filename)
 
 @app.route("/edited-image/<filename>")
-def eddited_file(filename):
+def edited_file(filename):
     """
     serve the shared folder.
     This shared folder is used to store the recognized image files if the user is logged in
@@ -63,7 +61,6 @@ def upload_image():
         # random_number = random.randint(10000, 99999)  # generate unique file name
         image_file = request.files["file"]
         print("[image_file]:", image_file)
-
         user_id = request.form.get("user_id", None)
 
         original_dir = "images_files"  # The shared folder
@@ -78,8 +75,10 @@ def upload_image():
         original_image_path = os.path.join(original_dir, image_file.filename)
         edited_image_path = os.path.join(edited_dir, image_file.filename)
         print("xx image_path", edited_image_path)
-        # image_file.save(original_image_path)  # Save the file in the shared folder
+        # Save the file in the shared folder
         image_file.save(edited_image_path)
+        image_file.seek(0) # Set the pointer to the start of the file so it can be saved again
+        image_file.save(original_image_path)
 
         # This is the actual machine learning work
         file_path = recognition_image(edited_image_path)  # recognition image

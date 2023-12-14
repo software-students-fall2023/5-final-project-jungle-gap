@@ -26,6 +26,7 @@ services:
     volumes:
       - ./machine-learning-client:/usr/src/app
       - ./machine-learning-client/images_files:/images_files
+      - ./machine-learning-client/edited_images_files:/edited_images_files
     ports:
       - "7001:5000"
     depends_on:

@@ -281,3 +281,8 @@ nav form button:hover {
 .signout-btn:hover {
   /* background-color: rgb(21, 94, 117); */
 }
+
+.archive-entry-container{
+  display: flex;
+  gap: 20px;
+}

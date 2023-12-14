@@ -4,9 +4,17 @@
 <div class="archive-container">
   <h1>Images Archive</h1>
   {% for image in images %}
-  <div class="image-container">
-    <image src= "{{server_url}}:7001//edited-image/{{image.filename}}">
+  <div class="archive-entry-container">
+    <div>
+      <p>Original:</p>
+      <image src="{{server_url}}:7001/image/{{image.filename}}">
+    </div>
+    <div>
+      <p>Recognized:</p>
+      <image src="{{server_url}}:7001/edited-image/{{image.filename}}">
+    </div>
   </div>
+  <br>
   {% endfor %}
 </div>
 {% endblock %}
