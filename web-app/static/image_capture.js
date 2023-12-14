@@ -99,17 +99,15 @@ function sendImageToServer(imgBlob) {
     method: "POST",
     body: formData,
   })
-    .then((response) => {
+    .then(async (response) => {
       console.log("response===", response.arrayBuffer);
 
       if (!response.ok) {
         throw new Error("Network response was not ok: " + response.statusText);
       } else {
         console.log("Upload successful", response);
-        let blob = new Blob([response.body], {
-          type: "image/png",
-        });
-
+        
+        let blob = await response.blob();
         updateResultPage(blob);
       }
     })
