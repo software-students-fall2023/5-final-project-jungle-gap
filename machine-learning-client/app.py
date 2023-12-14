@@ -38,10 +38,17 @@ app.config["SECRET_KEY"] = "supersecretkey"
 def uploaded_file(filename):
     """
     serve the shared folder.
-    This shared folder is used to store the image files if the user is logged in
+    This shared folder is used to store the original uneditted image files if the user is logged in
     """
     return send_from_directory("/images_files", filename)
 
+@app.route("/edited-image/<filename>")
+def uploaded_file(filename):
+    """
+    serve the shared folder.
+    This shared folder is used to store the recognized image files if the user is logged in
+    """
+    return send_from_directory("/editted_images_files", filename)
 
 @app.route("/upload", methods=["POST"])
 def upload_image():
@@ -59,24 +66,30 @@ def upload_image():
 
         user_id = request.form.get("user_id", None)
 
-        upload_dir = "images_files"  # The shared folder
-        if not os.path.exists(upload_dir):
-            os.makedirs(upload_dir)
+        original_dir = "images_files"  # The shared folder
+        editted_dir = "editted_images_files"
+        if not os.path.exists(original_dir):
+            os.makedirs(original_dir)
+
+        if not os.path.exists(editted_dir):
+            os.makedirs(editted_dir)
 
         print("image_file.filename", image_file.filename)
-
-        image_path = os.path.join(upload_dir, image_file.filename)
-        print("xx image_path", image_path)
-        image_file.save(image_path)  # Save the file in the shared folder
+        original_image_path = os.path.join(original_dir, image_file.filename)
+        editted_image_path = os.path.join(editted_dir, image_file.filename)
+        print("xx image_path", editted_image_path)
+        image_file.save(original_image_path)  # Save the file in the shared folder
+        image_file.save(editted_image_path)
 
         # This is the actual machine learning work
-        file_path = recognition_image(image_path)  # recognition image
+        file_path = recognition_image(editted_image_path)  # recognition image
 
         if user_id:  # If the user is logged in
             # Store user id and file in the database
             document = {
                 "user_id": user_id,
-                "file_path": file_path,
+                "eddited_file_path": file_path,
+                "original_file_path": original_image_path,
                 "filename": image_file.filename,
             }
             collection.insert_one(document)
