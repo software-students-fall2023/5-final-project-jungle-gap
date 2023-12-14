@@ -128,18 +128,12 @@ def js_upload_image():
     user_id = session["user"]["_id"] if "logged_in" in session else None
     data = {"user_id": user_id} if user_id else {}
 
-    upload_dir = "images_files"
-    if not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
-
     filename = f"{user_id}_temp.png"
-    image_path = os.path.join(upload_dir, filename)
-    image_file.save(image_path)
 
     print("/api/upload_image", image_file)
 
     # file upload request
-    files = [("file", (filename, open(image_path, "rb"), "image/png"))]
+    files = [("file", (filename, image_file, "image/png"))]
 
     response = requests.post(
         "http://mlclient:5000/upload",
@@ -172,17 +166,17 @@ def upload_image():
     user_id = session["user"]["_id"] if "logged_in" in session else None
     data = {"user_id": user_id} if user_id else {}
 
-    upload_dir = "images_files"
-    if not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
+    # upload_dir = "images_files"
+    # if not os.path.exists(upload_dir):
+    #     os.makedirs(upload_dir)
 
     filename = f"{user_id}_temp.png"
-    audio_path = os.path.join(upload_dir, filename)
-    request.files["image"].save(audio_path)
+    # audio_path = os.path.join(upload_dir, filename)
+    # request.files["image"].save(audio_path)
 
     print("/api/upload_image", request.files)
 
-    files = [("file", (filename, open(audio_path, "rb"), "image/jpeg"))]
+    files = [("file", (filename, request.files["image"], "image/jpeg"))]
 
     response = requests.post(
         "http://mlclient:5000/upload",
