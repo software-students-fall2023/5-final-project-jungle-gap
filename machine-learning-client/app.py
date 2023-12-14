@@ -38,17 +38,17 @@ app.config["SECRET_KEY"] = "supersecretkey"
 def uploaded_file(filename):
     """
     serve the shared folder.
-    This shared folder is used to store the original uneditted image files if the user is logged in
+    This shared folder is used to store the original unedited image files if the user is logged in
     """
     return send_from_directory("/images_files", filename)
 
 @app.route("/edited-image/<filename>")
-def uploaded_file(filename):
+def eddited_file(filename):
     """
     serve the shared folder.
     This shared folder is used to store the recognized image files if the user is logged in
     """
-    return send_from_directory("/editted_images_files", filename)
+    return send_from_directory("/edited_images_files", filename)
 
 @app.route("/upload", methods=["POST"])
 def upload_image():
@@ -67,28 +67,28 @@ def upload_image():
         user_id = request.form.get("user_id", None)
 
         original_dir = "images_files"  # The shared folder
-        editted_dir = "editted_images_files"
+        edited_dir = "edited_images_files"
         if not os.path.exists(original_dir):
             os.makedirs(original_dir)
 
-        if not os.path.exists(editted_dir):
-            os.makedirs(editted_dir)
+        if not os.path.exists(edited_dir):
+            os.makedirs(edited_dir)
 
         print("image_file.filename", image_file.filename)
         original_image_path = os.path.join(original_dir, image_file.filename)
-        editted_image_path = os.path.join(editted_dir, image_file.filename)
-        print("xx image_path", editted_image_path)
-        image_file.save(original_image_path)  # Save the file in the shared folder
-        image_file.save(editted_image_path)
+        edited_image_path = os.path.join(edited_dir, image_file.filename)
+        print("xx image_path", edited_image_path)
+        # image_file.save(original_image_path)  # Save the file in the shared folder
+        image_file.save(edited_image_path)
 
         # This is the actual machine learning work
-        file_path = recognition_image(editted_image_path)  # recognition image
+        file_path = recognition_image(edited_image_path)  # recognition image
 
         if user_id:  # If the user is logged in
             # Store user id and file in the database
             document = {
                 "user_id": user_id,
-                "eddited_file_path": file_path,
+                "edited_file_path": file_path,
                 "original_file_path": original_image_path,
                 "filename": image_file.filename,
             }
