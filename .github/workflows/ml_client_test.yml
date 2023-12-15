@@ -1,4 +1,4 @@
-name: Machine-Learning-Client CI
+name: Machine-Learning-Client (CI)
 
 on: [push, pull_request]
 
