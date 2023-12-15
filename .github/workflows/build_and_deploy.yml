@@ -1,0 +1,66 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
+jobs:
+  build:
+      name: Build and Push to DockerHub
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+
+        - name: Log in to DockerHub
+          run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USERNAME --password-stdin
+
+        - name: Build and Push ML Client Docker Image
+          run: |
+            docker build -t $DOCKER_USERNAME/ml_client:latest ./machine-learning-client
+            docker push $DOCKER_USERNAME/ml_client:latest
+
+        - name: Build and Push Web App Docker Image
+          run: |
+            docker build -t $DOCKER_USERNAME/web_app:latest ./web-app
+            docker push $DOCKER_USERNAME/web_app:latest
+
+        - name: Logout from DockerHub
+          run: docker logout
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass
+
+    - name: Deploy to Server
+      env:
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+      run: |
+        # Create .ssh directory and bypass host key checking
+        mkdir -p ~/.ssh
+        ssh-keyscan -H 134.209.170.83 >> ~/.ssh/known_hosts
+        
+        # SSH and Deploy using sshpass
+        sshpass -p $SSH_PASSWORD ssh -o StrictHostKeyChecking=no root@134.209.170.83 "
+          cd 5-final-project-jungle-gap &&
+          docker-compose down &&
+          git pull origin main &&
+          docker pull $DOCKER_USERNAME/web_app:latest &&
+          docker pull $DOCKER_USERNAME/ml_client:latest &&
+          docker-compose up -d &&
+          docker image prune -a -f &&
+          rm -rf ./machine-learning-client/images_files/* &&
+          rm -rf ./machine-learning-client/edited_images_files/*
+        "
