@@ -4,7 +4,6 @@ This file contains API for the web-app backend usage
 """
 
 import os
-# import random
 import traceback
 import mongomock
 from flask import (
@@ -16,6 +15,7 @@ from flask import (
 )
 from flask_cors import CORS
 import pymongo
+import random
 from ml_client import recognition_image
 
 app = Flask(__name__)
@@ -40,6 +40,7 @@ def uploaded_file(filename):
     """
     return send_from_directory("/images_files", filename)
 
+
 @app.route("/edited-image/<filename>")
 def edited_file(filename):
     """
@@ -47,6 +48,7 @@ def edited_file(filename):
     This shared folder is used to store the recognized image files if the user is logged in
     """
     return send_from_directory("/edited_images_files", filename)
+
 
 @app.route("/upload", methods=["POST"])
 def upload_image():
@@ -58,10 +60,13 @@ def upload_image():
         if "file" not in request.files:
             print("No image file in request")
             return jsonify({"error": "No image file"}), 400
-        # random_number = random.randint(10000, 99999)  # generate unique file name
+        random_number = random.randint(10000, 99999)  # generate unique file name
         image_file = request.files["file"]
-        print("[image_file]:", image_file)
         user_id = request.form.get("user_id", None)
+        if user_id:
+            filename = f"{user_id}_{random_number}.png"
+        else:
+            filename = "temp.png"
 
         original_dir = "images_files"  # The shared folder
         edited_dir = "edited_images_files"
@@ -71,10 +76,8 @@ def upload_image():
         if not os.path.exists(edited_dir):
             os.makedirs(edited_dir)
 
-        print("image_file.filename", image_file.filename)
-        original_image_path = os.path.join(original_dir, image_file.filename)
-        edited_image_path = os.path.join(edited_dir, image_file.filename)
-        print("xx image_path", edited_image_path)
+        original_image_path = os.path.join(original_dir, filename)
+        edited_image_path = os.path.join(edited_dir, filename)
         # Save the file in the shared folder
         image_file.save(edited_image_path)
         image_file.seek(0) # Set the pointer to the start of the file so it can be saved again
@@ -87,9 +90,7 @@ def upload_image():
             # Store user id and file in the database
             document = {
                 "user_id": user_id,
-                "edited_file_path": file_path,
-                "original_file_path": original_image_path,
-                "filename": image_file.filename,
+                "filename": filename,
             }
             collection.insert_one(document)
         # Return recognition image
@@ -98,7 +99,7 @@ def upload_image():
         msg = traceback.format_exc()
         print(msg)
         return (
-            jsonify({"err_msg": msg, "filename": image_file.filename}),
+            jsonify({"err_msg": msg, "filename": filename}),
             500,
         )
 

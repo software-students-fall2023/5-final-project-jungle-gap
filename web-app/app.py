@@ -68,6 +68,7 @@ def homescreen_view():
     """
     return render_template("index.html")
 
+
 @app.route("/archive")
 @login_required
 def archive_view():
@@ -77,22 +78,8 @@ def archive_view():
     server_url = os.environ.get("SERVER_URL", "http://127.0.0.1")
     user_images = db.history.find({
         "user_id": session["user"]["_id"]
-    }) # Find the images in the database that have user's id
-    app.logger.warning(user_images)
-    images = list(map(lambda user_image: {"filename": user_image["filename"]}, user_images))
-    return render_template("archive.html",images=images, server_url=server_url)
-    
-
-# @app.route("/recognition")
-# @login_required
-# def transcripts_view():
-#     """
-#     View transcripts generated before by the user
-#     """
-#     user_transcripts = db.history.find(
-#         {"user_id": session["user"]["_id"]}
-#     )  # Use this to find the user's record in the db
-#     return render_template("transcripts.html", transcripts=user_transcripts)
+    }) # Find the images in the database that has user's id
+    return render_template("archive.html", images=user_images, server_url=server_url)
 
 
 @app.route("/login")
@@ -130,8 +117,6 @@ def js_upload_image():
 
     filename = f"{user_id}_temp.png"
 
-    print("/api/upload_image", image_file)
-
     # file upload request
     files = [("file", (filename, image_file, "image/png"))]
 
@@ -143,13 +128,9 @@ def js_upload_image():
     )
 
     if response.status_code == 200:
-        # base64 encoding
-        # ls_f = base64.b64encode(BytesIO(response.content).read())
-        # imgdata = base64.b64decode(ls_f)
         resp = make_response(response.content)
 
         resp.headers["Content-Type"] = "image/png"
-        print("resp=", resp)
         return resp  # For javascript display
     return (
         jsonify({"error": "Error processing audio", "details": response.text}),
@@ -166,16 +147,7 @@ def upload_image():
     user_id = session["user"]["_id"] if "logged_in" in session else None
     data = {"user_id": user_id} if user_id else {}
 
-    # upload_dir = "images_files"
-    # if not os.path.exists(upload_dir):
-    #     os.makedirs(upload_dir)
-
     filename = f"{user_id}_temp.png"
-    # audio_path = os.path.join(upload_dir, filename)
-    # request.files["image"].save(audio_path)
-
-    print("/api/upload_image", request.files)
-
     files = [("file", (filename, request.files["image"], "image/jpeg"))]
 
     response = requests.post(
@@ -192,7 +164,7 @@ def upload_image():
     return (
         jsonify(
             {
-                "error": "Failed to process audio. Please try again.",
+                "error": "Failed to process image. Please try again.",
                 "err_code": response.status_code,
             }
         ),
