@@ -8,10 +8,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: d6wjgdhwddy
     ports: 
       - "27017:27017"
-   
+
   webapp:
-    build: ./web-app
-    image: web_app
+    image: isomorphismss/web_app:latest
     container_name: my_web_app
     volumes:
       - ./web-app:/usr/src/app
@@ -23,8 +22,7 @@ services:
     tty: true
 
   mlclient:
-    build: ./machine-learning-client
-    image: ml_client
+    image: isomorphismss/ml_client:latest
     container_name: my_ml_client
     volumes:
       - ./machine-learning-client:/usr/src/app
