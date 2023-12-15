@@ -17,6 +17,8 @@ opencv-python = "*"
 pylance = "*"
 requests = "*"
 face-recognition = "*"
+setuptools = "*"
+coverage = "*"
 
 [dev-packages]
 
