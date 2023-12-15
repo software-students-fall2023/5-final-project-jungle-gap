@@ -14,14 +14,14 @@ from app import app
 class MockResponse:
     """Mock response class for simulating HTTP responses."""
 
-    def __init__(self, json_data, status_code):
+    def __init__(self, json_data, status_code, content=None):
         self.json_data = json_data
         self.status_code = status_code
+        self.content = content if content is not None else b''
 
     def json(self):
         """Return JSON data."""
         return self.json_data
-
 
 @contextmanager
 def captured_templates(app):
@@ -119,64 +119,48 @@ def test_logout(client):
     with client.session_transaction() as sess:
         assert "logged_in" not in sess
 
+def test_upload_image_success(client):
+    """Test successful image upload via /api/upload_image."""
 
-def test_upload_picture(client):
-    """Test the image upload functionality."""
+    with patch('requests.post', return_value=MockResponse({}, 200)) as mock_post:
+        image_file_path = os.path.join('tests/test_pictures', 'test_image.png')
 
-    mock_response_data = {
-        "transcript": "test transcript",
-        "sentiment": 0.5,
-        "filename": "testfile.wav",
-    }
-
-    with patch(
-        "requests.post",
-        return_value=MockResponse(mock_response_data, 200),
-    ) as mock_post:
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-
-        image_file_path = current_directory + "/test_p.jpeg"
-
-        # with open(image_file_path, "rb") as image:
-        response = client.post(
-            "/api/upload_image",
-            data={"image": open(image_file_path, "rb")},
-            content_type="multipart/form-data",
-        )
-        assert response.status_code == 200
-        assert mock_post.called
-
-        json_data = response.get_json()
-        assert json_data["transcript"] == "test transcript"
-        assert json_data["sentiment"] == 0.5
-        assert json_data["filename"] == "testfile.wav"
-
-
-def test_js_upload_picture(client):
-    """Test the /api/js_upload_image endpoint for audio upload and JSON response."""
-
-    mock_response_data = {
-        "transcript": "test transcript",
-        "sentiment": 0.5,
-        "filename": "testfile.wav",
-    }
-
-    with patch(
-        "requests.post", return_value=MockResponse(mock_response_data, 200)
-    ) as mock_post:
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-
-        image_file_path = current_directory + "/test_p.jpeg"
-
-        with open(image_file_path, "rb") as image:
+        with open(image_file_path, 'rb') as image:
             response = client.post(
-                "/api/js_upload_image",
-                data={"image": image},
-                content_type="multipart/form-data",
+                '/api/upload_image',
+                data={'image': (image, 'test_image.png')},
+                content_type='multipart/form-data'
             )
 
         assert response.status_code == 200
         assert mock_post.called
 
-        json_data = response.get_json()
-        assert json_data["filename"] == "test_p.jepg"
+def test_upload_image_no_file(client):
+    """Test image upload with no file provided to /api/upload_image."""
+
+    response = client.post('/api/upload_image', data={})
+    assert response.status_code == 400
+    assert b'400 Bad Request' in response.data
+    
+def test_js_upload_image_success(client):
+    """Test successful image upload via /api/js_upload_image."""
+
+    with patch('requests.post', return_value=MockResponse({}, 200)) as mock_post:
+        image_file_path = os.path.join('tests/test_pictures', 'test_image.png')
+
+        with open(image_file_path, 'rb') as image:
+            response = client.post(
+                '/api/js_upload_image',
+                data={'image': (image, 'test_image.png')},
+                content_type='multipart/form-data'
+            )
+
+        assert response.status_code == 200
+        assert mock_post.called
+
+def test_js_upload_image_no_file(client):
+    """Test image upload with no file provided to /api/js_upload_image."""
+
+    response = client.post('/api/js_upload_image', data={})
+    assert response.status_code == 400
+    assert b'400 Bad Request' in response.data

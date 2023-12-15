@@ -1,3 +1,4 @@
-# Final Project
+# Face Recognition Service
 
-An exercise to put to practice software development teamwork, subsystem communication, containers, deployment, and CI/CD pipelines. See [instructions](./instructions.md) for details.
+[![Web-App CI/CD](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/web_app_test.yml/badge.svg)](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/web_app_test.yml)
+[![Machine-Learning-Client CI](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/ml_client_test.yml/badge.svg)](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/ml_client_test.yml) 

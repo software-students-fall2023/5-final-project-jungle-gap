@@ -133,7 +133,7 @@ def js_upload_image():
         return resp  # For javascript display
     return (
         jsonify({"error": "Error processing audio", "details": response.text}),
-        response.status_code,
+        400,
     )
 
 
@@ -167,7 +167,7 @@ def upload_image():
                 "err_code": response.status_code,
             }
         ),
-        response.status_code,
+        400,
     )
 
 

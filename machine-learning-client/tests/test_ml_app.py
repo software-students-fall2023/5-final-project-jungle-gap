@@ -26,37 +26,9 @@ def test_upload_picture_no_file(client):
     assert b"No image file" in response.data
 
 
-def test_upload_picture_with_file(client):
-    """
-    Test the /upload route with a valid picture file
-    """
-    # Path to the picture file
-    picture_file_path = os.path.join("tests/test_pictures", "test_p.jpeg")
-
-    # Open the file in binary mode
-    with open(picture_file_path, "rb") as picture_file:
-        data = {"file": (picture_file, "test_p.jpeg")}
-        response = client.post("/upload", data=data, content_type="multipart/form-data")
-        assert response.status_code == 200
-
-
-def test_upload_picture_with_file_non_trancriptable(client):
-    """
-    Test the /upload route with an picture file that has no english words
-    """
-    # Path to the picture file
-    picture_file_path = os.path.join("tests/test_pictures", "test_p.jpeg")
-
-    # Open the file in binary mode
-    with open(picture_file_path, "rb") as picture_file:
-        data = {"file": (picture_file, "test_p.jpeg")}
-        response = client.post("/upload", data=data, content_type="multipart/form-data")
-        assert response.status_code == 200
-
-
 def test_upload_short_picture(client):
     """
-    Test the /upload route with a short picture file
+    Test the /upload route with a jpeg picture file
     """
     # Path to the file file
     picture_file_path = os.path.join("tests/test_pictures", "test_p.jpeg")
@@ -66,14 +38,11 @@ def test_upload_short_picture(client):
         data = {"file": (picture_file, "test_p.jpeg")}
         response = client.post("/upload", data=data, content_type="multipart/form-data")
         assert response.status_code == 200
-        json_data = response.get_json()
-        assert json_data.get("transcript") == "kids are talking by the door"
 
 
 def test_upload_picture_with_jpg_format_file(client):
     """
-    Test the /upload route with a short picture file
-    This is to test the format conversion function of the ml backend
+    Test the /upload route with a jpg picture file
     """
     # Path to the picture file
     picture_file_path = os.path.join("tests/test_pictures", "test_p.jpg")
