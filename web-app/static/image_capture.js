@@ -14,23 +14,49 @@ savePhoto.disabled = true;
 
 var uploadForm = document.getElementById("upload-form");
 var imageFile = document.getElementById("image-file");
+var responseMessage = document.getElementById("response-message");
 
-uploadForm.addEventListener("submit", async function (event) {
+uploadForm.addEventListener("submit", function(event) {
   event.preventDefault(); // Prevent the normal submission of the form
 
+  // Clear any previous response messages
+  responseMessage.innerHTML = "";
+
+  // Check if an image is selected
+  if (imageFile.files.length === 0) {
+      responseMessage.innerHTML = "<p class='error-status'>Please select an image file to upload.</p>";
+      return;
+  }
+
+  // Check if the file is an image
+  const imageFileSelected = imageFile.files[0];
+  if (!imageFileSelected.type.startsWith('image/')) {
+      responseMessage.innerHTML = "<p class='error-status'>Please select a valid image file.</p>";
+      return;
+  }
+
   // Display a processing message
-  document.getElementById("response-message").innerHTML =
-    "<p class='processing-status'>Processing...</p>";
+  responseMessage.innerHTML = "<p class='processing-status'>Processing image file...</p>";
 
   let formData = new FormData(this); // 'this' refers to the form
 
-  let response = await fetch("/api/upload_image", {
-    method: "POST",
-    body: formData,
+  fetch('/api/upload_image', {
+      method: 'POST',
+      body: formData,
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.blob();
+  })
+  .then(blob => {
+      updateResultPage(blob); // Use the same function to update the page
+  })
+  .catch(error => {
+      console.error('Error uploading file:', error);
+      responseMessage.innerHTML = "<p class='error-status'>Error uploading file, please try again!</p>";
   });
-  let blob = await response.blob();
-
-  updateResultPage(blob); // Use the same function to update the page
 });
 
 toShoot.addEventListener("click", async () => {
@@ -108,7 +134,6 @@ function sendImageToServer(imgBlob) {
 function updateResultPage(blob) {
   let resultContainer = document.getElementById("response-message");
   let img = document.createElement("img");
-  img.style = "width:200px";
   img.src = URL.createObjectURL(blob);
   let htmlContent = "<div><h3>Result:</h3></div>";
   resultContainer.innerHTML = htmlContent;
