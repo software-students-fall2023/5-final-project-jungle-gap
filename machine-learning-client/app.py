@@ -17,6 +17,7 @@ from flask_cors import CORS
 import pymongo
 import random
 from ml_client import recognition_image
+from urllib.parse import quote_plus
 
 app = Flask(__name__)
 CORS(app)  # Stop the security protection
@@ -25,11 +26,8 @@ CORS(app)  # Stop the security protection
 if os.environ.get("TESTING"):
     client = mongomock.MongoClient()
 else:
-    client = pymongo.MongoClient("mongodb://db:27017")
-
-db = client["Isomorphism"]
-collection = db["history"]  # ml result and metadata are stored in this collection
-app.config["SECRET_KEY"] = "supersecretkey"
+    client = pymongo.MongoClient('mongodb://Isomorphism:d6wjgdhwddy@db:27017')
+db = client['Isomorphism']
 
 
 @app.route("/image/<filename>")
@@ -92,7 +90,7 @@ def upload_image():
                 "user_id": user_id,
                 "filename": filename,
             }
-            collection.insert_one(document)
+            db.history.insert_one(document)
         # Return recognition image
         return send_file(file_path)
     except Exception as e:

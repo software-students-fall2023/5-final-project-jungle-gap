@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Face Recognition Service</title>
+  <title>Audio Transcription Service</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
-
 <body>
   <div class="container">
     <nav>
-      <a class="bl" href="/">Home</a>
+      <a href="/">Home</a>
       {% if session.logged_in %}
-      <span style="margin-left: 400px;">Welcome, {{ session.user.username }}!</span>
-      <a href="/archive">Archive</a>
-      <form method="POST" action="/user/signout" style="display: inline;">
-        <button type="submit" class="signout-btn">Sign Out</button>
-      </form>
+        <span>Welcome, {{ session.user.username }}!</span>
+        <a href="/archive">Archive</a>
+        <form method="POST" action="/user/signout" style="display: inline;">
+          <button type="submit" class="signout-btn">Sign Out</button>
+        </form>
       {% else %}
-      <a class="br" href="/login">Log In</a>
-      <a href="/signup">Sign Up</a>
+        <a href="/login">Log In</a>
+        <a href="/signup">Sign Up</a>
       {% endif %}
     </nav>
     <main>{% block container %}{% endblock %}</main>
@@ -26,5 +24,4 @@
   {% block scripts %}
   {% endblock scripts %}
 </body>
-
 </html>

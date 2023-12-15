@@ -1,196 +1,117 @@
 /* Enhanced Base Styles */
 body {
-  font-family: Fira Code VF,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #e8f0fe;
+  color: #454545;
   line-height: 1.6;
 }
 
-h1,
-h2 {
-  color: #444;
+h1, h2 {
+  color: #355c7d;
   text-align: center;
 }
 
-/* Transcripts Container Styles */
-.transcripts-container {
-  max-width: 800px;
-  margin: 20px auto;
+/* Archive Styling */
+.archive-container {
+  width: 90%;
+  margin: auto;
+}
+
+.archive-entry-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  border: 2px solid #c06c84;
   padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f8f1f1;
+  border-radius: 15px;
 }
 
-.transcript {
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.transcript:last-child {
-  border-bottom: none;
-}
-
-.transcript p {
-  font-size: 1.1em;
-  margin-bottom: 10px;
-}
-
-/* Audio Player Styling */
-.audio-player {
-  border-bottom: 3px solid #eee;
+.image-container {
+  flex-basis: 45%;
   text-align: center;
-  margin-top: 20px;
 }
 
-audio {
-  width: 100%;
-  max-width: 400px;
-  margin-top: 10px;
-}
-
-/* Attitude Analysis Styling */
-.transcript p:nth-child(3) {
-  font-weight: bold;
-  color: #0056b3;
-}
-.sentiment-interpretation {
-  font-weight: bold;
-  color: #0056b3;
-}
-
-/* Hover Effects */
-a:hover,
-input[type="submit"]:hover,
-button.submit-btn:hover,
-.back-btn:hover {
-  opacity: 0.9;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .container,
-  .upload-container,
-  .response-container,
-  .transcripts-container {
-    width: 90%;
-    margin: 20px auto;
-  }
-
-  audio {
-    width: 100%;
-  }
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 /* Enhanced Navigation Styles */
 nav {
-  background-color: rgb(251, 191, 36);
-  color: #64748B;
-  padding: 10px 20px;
-  border-radius: 5px;
+  background-color: #6c5b7b;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-
-  .bl {
-    justify-content: flex-start;
-    display: flex;
-  }
-
-  .br {
-    flex:1;           
-    justify-content: flex-end;
-    display: flex;
-  }
+  margin-bottom: 40px;
 }
 
-
-nav a,
-nav form button {
+nav a, nav form button {
   color: white;
-  margin-left: 20px;
+  margin-left: 25px;
   text-decoration: none;
   font-weight: bold;
 }
 
-nav a:hover,
-nav form button:hover {
-  color: #0056b3;
+nav a:hover, nav form button:hover {
+  color: #503b63;
 }
 
 /* Main Container */
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
 }
 
 /* Upload Container */
 .upload-container {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
   text-align: center;
-}
-
-.upload-container h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Styling for Input Fields */
-.upload-container input[type="text"],
-.upload-container input[type="password"] {
-  width: 380px;
-  padding: 12px 20px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  box-sizing: border-box;
 }
 
 /* Styling for Submit Button */
 .submit-btn {
-  width: 150px;
-  padding: 12px 20px;
-  margin-top: 10px;
+  width: 180px;
+  padding: 15px 25px;
+  margin-top: 15px;
   border: none;
-  border-radius: 4px;
-  background-color: rgb(2, 132, 199);
+  border-radius: 5px;
+  background-color: #c06c84;
   color: white;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  box-sizing: border-box;
+  transition: background-color 0.3s;
 }
 
 .submit-btn:hover {
-  background-color: rgb(21, 94, 117);
+  background-color: #a2566f;
 }
 
 /* Audio Capture Buttons */
-.audio-capture-container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
 .audio-capture-container button {
-  background-color: rgb(2, 132, 199);
+  background-color: #6c5b7b;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  margin-right: 10px;
+  font-size: 1rem;
+  margin-right: 15px;
+  transition: background-color 0.3s;
 }
 
 .audio-capture-container button:hover {
-  background-color: rgb(21, 94, 117);
+  background-color: #503b63;
 }
 
 .audio-capture-container button:disabled {
@@ -199,75 +120,69 @@ nav form button:hover {
   color: #666666;
 }
 
-.processing-status {
-  color: #007bff;
+/* Error and Processing Status Styling */
+.error-status, .processing-status {
   font-weight: bold;
+  margin-bottom: 20px;
+  display: block;
 }
 
 .error-status {
-  color: #ff003c;
-  font-weight: bold;
+  color: #ff3860;
+}
+
+.processing-status {
+  color: #6c5b7b;
 }
 
 /* File Input and Upload Button */
-#upload-form {
-  margin-top: 20px;
-}
-
 #upload-form input[type="file"] {
   margin-bottom: 20px;
 }
 
-/* Style for the custom file input label */
 .file-input-label {
   display: inline-block;
-  padding: 10px 20px;
-  margin-top: 10px;
+  padding: 12px 25px;
   border: 1px solid #8a8484;
-  border-radius: 4px;
+  border-radius: 5px;
   background-color: #f8f8f8;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .file-input-label:hover {
   background-color: #b8b0b0;
 }
 
-/* Style for the span that shows the chosen file name */
-#file-chosen {
-  display: inline-block;
-  margin-left: 10px;
-  font-size: 0.9rem;
-}
-
-/* Error Message Styling */
-.error {
-  color: #ff3860;
-  background-color: #ffebee;
-  padding: 10px;
-  border-radius: 4px;
+/* Response Message Styling */
+#response-message img {
+  max-width: 400px; /* Adjust as needed */
   margin-top: 20px;
+  border-radius: 8px;
 }
 
-/* Upload Form Styling */
-#upload-form {
-  border: 2px dashed #ccc;
-  padding: 20px;
-  margin: 20px 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+  .container, .upload-container {
+    width: 95%;
+    margin: 20px auto;
+  }
+  .archive-entry-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  #upload-form input[type="file"] {
+    width: 100%;
+  }
 }
 
-#upload-form input[type="file"] {
-  margin-bottom: 10px;
-  width: 80%;
-}
-
+/* Sign Out Button */
 .signout-btn {
-  background-color: #ff3860;
+  background-color: #ff5c5c;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -279,10 +194,57 @@ nav form button:hover {
 }
 
 .signout-btn:hover {
-  /* background-color: rgb(21, 94, 117); */
+  background-color: #e64545;
 }
 
-.archive-entry-container{
-  display: flex;
-  gap: 20px;
+/* File Input and File Name Display */
+#upload-form input[type="file"] {
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+.file-input-label {
+  display: block; /* Keep as block */
+  padding: 10px 20px;
+  margin: 10px auto; /* Set top/bottom margin and auto for left/right */
+  border: 1px solid #8a8484;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  width: 20%;
+  cursor: pointer;
+}
+
+.file-input-label:hover {
+  background-color: #b8b0b0;
+}
+
+#file-chosen {
+  display: block; /* Changed from inline-block to block */
+  margin-bottom: 20px; /* Added margin-bottom for spacing */
+  font-size: 0.9rem;
+}
+
+/* Sign In and Sign Up Form Styling */
+.upload-container form h2 {
+  margin-top: 20px;
+  color: #355c7d;
+}
+
+.upload-container input[type="text"],
+.upload-container input[type="password"] {
+  width: 30%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Error Message Styling */
+.error {
+  color: #ff3860;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
 }

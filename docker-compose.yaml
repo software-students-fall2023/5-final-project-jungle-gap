@@ -3,9 +3,12 @@ services:
   db:
     image: mongo
     container_name: my_mongo_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: Isomorphism
+      MONGO_INITDB_ROOT_PASSWORD: d6wjgdhwddy
     ports: 
       - "27017:27017"
-    
+   
   webapp:
     build: ./web-app
     image: web_app
