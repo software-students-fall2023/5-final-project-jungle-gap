@@ -27,9 +27,8 @@ app = Flask(__name__)
 if os.environ.get("TESTING"):
     client = mongomock.MongoClient()
 else:
-    client = pymongo.MongoClient("mongodb://db:27017")
-
-db = client["Isomorphism"]
+    client = pymongo.MongoClient('mongodb://Isomorphism:d6wjgdhwddy@db:27017')
+db = client['Isomorphism']
 
 # Set secret key for sessions
 app.secret_key = b"\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5"
