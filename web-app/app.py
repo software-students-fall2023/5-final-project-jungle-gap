@@ -8,6 +8,9 @@ import uuid
 import requests
 import pymongo
 import mongomock
+from dotenv import load_dotenv
+
+load_dotenv()
 from flask import (
     Flask,
     make_response,

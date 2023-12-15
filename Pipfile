@@ -19,6 +19,7 @@ requests = "*"
 face-recognition = "*"
 setuptools = "*"
 coverage = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
