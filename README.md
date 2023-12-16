@@ -111,19 +111,11 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
 - The application also depends on [gcc/g++](https://gcc.gnu.org/) and [cmake](https://cmake.org/download/). If you don't already have these installed on your computer, you may choose your preferred method of installation. Alternatively, you can follow the instructions provided below for a guided setup:
 
     - Windows:
-        - Download and install [msys2](https://www.msys2.org/) by following the instructions under "installation" section.
-        - Open `msys2-UCRT64` terminal and type the following commands to install gcc/g++ and cmake:
+        - Download and install [Microsoft Visual Studio (Community)](https://visualstudio.microsoft.com/downloads/) by following the instructions under "installation" section.
+        - Start the installer and follow the instructions.
+        - Choose worloads "Desktop development with C++".
+        - Verify the installations by checking the versions:
 
-            ```shell
-            pacman -S mingw-w64-ucrt-x86_64-gcc
-            ```
-
-            ```shell
-            pacman -S mingw-w64-ucrt-x86_64-cmake
-            ```
-        - Add the `\msys64\ucrt64\bin` folder to the `PATH` environment variables.
-        - Verify installation by typing the following commands in your terminal, you should be able to see the version number of each program:
-        
             ```shell
             gcc --version
             ```
@@ -135,6 +127,7 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
             ```shell
             cmake --version
             ```
+        
     - MacOS:
 
         - Ensure you have Homebrew installed. If not, install it with the following command in the terminal:
@@ -166,7 +159,9 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
             ```shell
             cmake --version
             ```
-        If you can't get the file version after installation, please make sure these programs are in `usr/local/bin` and the `/usr/local/bin` is already in `PATH`.
+        - Note: If you cannot retrieve the version information post-installation, ensure that the programs are located in `/usr/local/bin` and that this directory is included in your `PATH`.
+
+    These installations are necessary because the project utilizes the `face_recognition` package, which depends on `dlib`. `dlib`, in turn, requires gcc/g++, cmake, and associated libraries. Post-installation, if you encounter issues with `pipenv install`, follow the error prompts to resolve them. The exact libraries needed can vary based on the machine. We apologize for the inconveniences.
     
 ### Cloning the Project
 
