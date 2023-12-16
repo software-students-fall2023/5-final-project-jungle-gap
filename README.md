@@ -109,22 +109,20 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
 ### Prerequisites
 - Ensure you have [Python](https://www.python.org/downloads/) 3.12 installed on your system.
 - The application also depends on [gcc/g++](https://gcc.gnu.org/) and [cmake](https://cmake.org/download/). If you don't already have these installed on your computer, you may choose your preferred method of installation. Alternatively, you can follow the instructions provided below for a guided setup:
+
     - Windows:
         - Download and install [msys2](https://www.msys2.org/) by following the instructions under "installation" section.
-        - Open `msys2` terminal and type the following commands to install gcc, g++, and cmake.
+        - Open `msys2-UCRT64` terminal and type the following commands to install gcc/g++ and cmake:
 
             ```shell
             pacman -S mingw-w64-ucrt-x86_64-gcc
             ```
 
             ```shell
-            pacman -S mingw-w64-ucrt-x86_64-g++
-            ```
-
-            ```shell
             pacman -S mingw-w64-ucrt-x86_64-cmake
             ```
-        - Verify installation by typing the following commands in your terminal, you should be able to see the version number of each program.
+        - Add the `\msys64\ucrt64\bin` folder to the `PATH` environment variables.
+        - Verify installation by typing the following commands in your terminal, you should be able to see the version number of each program:
         
             ```shell
             gcc --version
@@ -137,3 +135,128 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
             ```shell
             cmake --version
             ```
+    - MacOS:
+
+        - Ensure you have Homebrew installed. If not, install it with the following command in the terminal:
+
+            ```shell
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            ```
+        
+        - Install GCC/G++ and CMake via Homebrew with the commands:
+
+            ```shell
+            brew install gcc
+            ```
+
+            ```shell
+            brew install cmake
+            ```
+
+        - Verify the installations by checking the versions:
+
+            ```shell
+            gcc --version
+            ```
+
+            ```shell
+            g++ --version
+            ```
+
+            ```shell
+            cmake --version
+            ```
+        If you can't get the file version after installation, please make sure these programs are in `usr/local/bin` and the `/usr/local/bin` is already in `PATH`.
+    
+### Cloning the Project
+
+```shell
+git clone https://github.com/software-students-fall2023/5-final-project-jungle-gap
+```
+
+### Navigating to the Project Root Directory
+
+```shell
+cd 5-final-project-jungle-gap
+```
+
+### Installing pipenv
+If `pipenv` is not installed on your machine, install it using:
+
+```shell
+pip install pipenv
+```
+
+### Installing Dependencies
+Install all the necessary dependencies by executing:
+
+```shell
+pipenv install
+```
+
+### Activating the Virtual Environment
+Activate the virtual environment using:
+
+```shell
+pipenv shell
+```
+
+### Running Tests
+Navigate to either the `web-app` or `machine-learning-client` subdirectory depending on which component you want to test.
+
+For the web-app:
+
+```shell
+cd web-app
+```
+
+For the machine-learning-client:
+
+```shell
+cd machine-learning-client
+```
+
+Run `pytest` and view the coverage report:
+
+```shell
+pipenv run coverage run -m pytest
+```
+
+```shell
+pipenv run coverage report
+```
+
+To view a detailed HTML report showing lines covered and missed:
+
+```shell
+pipenv run coverage html
+```
+
+### Test Coverage Report (as of 12/17/2023, reported by Github Action)
+- Machine-Learning-Client Coverage:
+
+    ```shell
+    Name                   Stmts   Miss  Cover
+    ------------------------------------------
+    app.py                    49      7    86%
+    ml_client.py              15      0   100%
+    tests/__init__.py          0      0   100%
+    tests/test_ml_app.py      24      0   100%
+    ------------------------------------------
+    TOTAL                     88      7    92%
+    ```
+
+- Web-App Coverage:
+
+    ```shell
+    Name                    Stmts   Miss  Cover
+    -------------------------------------------
+    app.py                     96     15    84%
+    tests/__init__.py           0      0   100%
+    tests/test_web_app.py      79      1    99%
+    -------------------------------------------
+    TOTAL                     175     16    91%
+    ```
+
+## Conclusion
+Thanks for trying out our application. If you have any questions or feedback, feel free to reach out to us via [GitHub Discussions](https://docs.github.com/en/discussions) for our repository. We appreciate your interest and support!
