@@ -42,7 +42,6 @@ def login_required(f):
     """
     login required decorators
     """
-
     @wraps(f)
     def wrap(*args, **kwargs):
         if "logged_in" in session:
@@ -145,7 +144,6 @@ def upload_image():
     """
     Endpoint specifically for image file upload and get JSON response
     """
-    # Pass user id to the ml client if the user is logged in
     user_id = session["user"]["_id"] if "logged_in" in session else None
     data = {"user_id": user_id} if user_id else {}
 

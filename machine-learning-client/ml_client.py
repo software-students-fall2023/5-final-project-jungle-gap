@@ -13,9 +13,8 @@ SentimentResult = namedtuple("SentimentResult", ["polarity", "subjectivity"])
 
 def recognition_image(file_path):
     """
-    recognition the given image file
+    recognize the given image file
     """
-
     print("[recognition_image] file_path=", file_path)
 
     image = fr.load_image_file(file_path)

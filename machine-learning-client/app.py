@@ -25,8 +25,8 @@ CORS(app)  # Stop the security protection
 if os.environ.get("TESTING"):
     client = mongomock.MongoClient()
 else:
-    client = pymongo.MongoClient('mongodb://Isomorphism:d6wjgdhwddy@db:27017')
-db = client['Isomorphism']
+    client = pymongo.MongoClient("mongodb://Isomorphism:d6wjgdhwddy@db:27017")
+db = client["Isomorphism"]
 
 
 @app.route("/image/<filename>")
@@ -76,7 +76,9 @@ def upload_image():
     edited_image_path = os.path.join(edited_dir, filename)
     # Save the file in the shared folder
     image_file.save(edited_image_path)
-    image_file.seek(0) # Set the pointer to the start of the file so it can be saved again
+    image_file.seek(
+        0
+    )  # Set the pointer to the start of the file so it can be saved again
     image_file.save(original_image_path)
 
     # This is the actual machine learning work
@@ -91,7 +93,6 @@ def upload_image():
         db.history.insert_one(document)
     # Return recognition image
     return send_file(file_path)
-
 
 
 if __name__ == "__main__":

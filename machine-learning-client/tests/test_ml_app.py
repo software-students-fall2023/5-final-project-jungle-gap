@@ -30,7 +30,7 @@ def test_upload_short_picture(client):
     """
     Test the /upload route with a jpeg picture file
     """
-    # Path to the file file
+    # Path to the image file
     picture_file_path = os.path.join("tests/test_pictures", "test_p.jpeg")
 
     # Open the file in binary mode
@@ -44,7 +44,7 @@ def test_upload_picture_with_jpg_format_file(client):
     """
     Test the /upload route with a jpg picture file
     """
-    # Path to the picture file
+    # Path to the image file
     picture_file_path = os.path.join("tests/test_pictures", "test_p.jpg")
 
     # Open the file in binary mode
