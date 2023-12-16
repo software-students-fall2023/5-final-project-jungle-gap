@@ -109,4 +109,31 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
 ### Prerequisites
 - Ensure you have [Python](https://www.python.org/downloads/) 3.12 installed on your system.
 - The application also depends on [gcc/g++](https://gcc.gnu.org/) and [cmake](https://cmake.org/download/). If you don't already have these installed on your computer, you may choose your preferred method of installation. Alternatively, you can follow the instructions provided below for a guided setup:
+    - Windows:
+        - Download and install [msys2](https://www.msys2.org/) by following the instructions under "installation" section.
+        - Open `msys2` terminal and type the following commands to install gcc, g++, and cmake.
 
+            ```shell
+            pacman -S mingw-w64-ucrt-x86_64-gcc
+            ```
+
+            ```shell
+            pacman -S mingw-w64-ucrt-x86_64-g++
+            ```
+
+            ```shell
+            pacman -S mingw-w64-ucrt-x86_64-cmake
+            ```
+        - Verify installation by typing the following commands in your terminal, you should be able to see the version number of each program.
+        
+            ```shell
+            gcc --version
+            ```
+
+            ```shell
+            g++ --version
+            ```
+
+            ```shell
+            cmake --version
+            ```
