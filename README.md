@@ -111,23 +111,11 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
 - The application also depends on [gcc/g++](https://gcc.gnu.org/) and [cmake](https://cmake.org/download/). If you don't already have these installed on your computer, you may choose your preferred method of installation. Alternatively, you can follow the instructions provided below for a guided setup:
 
     - Windows:
+
         - Download and install [Microsoft Visual Studio (Community)](https://visualstudio.microsoft.com/downloads/) by following the instructions under "installation" section.
         - Start the installer and follow the instructions.
-        - Choose worloads "Desktop development with C++".
-        - Verify the installations by checking the versions:
+        - Check the workloads option "Desktop development with C++" and finish the installation.
 
-            ```shell
-            gcc --version
-            ```
-
-            ```shell
-            g++ --version
-            ```
-
-            ```shell
-            cmake --version
-            ```
-        
     - MacOS:
 
         - Ensure you have Homebrew installed. If not, install it with the following command in the terminal:
@@ -159,9 +147,10 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
             ```shell
             cmake --version
             ```
+
         - Note: If you cannot retrieve the version information post-installation, ensure that the programs are located in `/usr/local/bin` and that this directory is included in your `PATH`.
 
-    These installations are necessary because the project utilizes the `face_recognition` package, which depends on `dlib`. `dlib`, in turn, requires gcc/g++, cmake, and associated libraries. Post-installation, if you encounter issues with `pipenv install`, follow the error prompts to resolve them. The exact libraries needed can vary based on the machine. We apologize for the inconveniences.
+    These installations are necessary because the project utilizes the `face_recognition` package, which depends on `dlib`. `dlib`, in turn, requires gcc/g++, cmake, and associated libraries. Post-installation, if you still encounter issues with `pipenv install`, please kindly follow the error prompts to resolve them. The exact libraries needed can vary based on the machine. We apologize for the inconveniences.
     
 ### Cloning the Project
 
@@ -233,12 +222,12 @@ pipenv run coverage html
     ```shell
     Name                   Stmts   Miss  Cover
     ------------------------------------------
-    app.py                    49      7    86%
+    app.py                    49      4    92%
     ml_client.py              15      0   100%
     tests/__init__.py          0      0   100%
-    tests/test_ml_app.py      24      0   100%
+    tests/test_ml_app.py      32      0   100%
     ------------------------------------------
-    TOTAL                     88      7    92%
+    TOTAL                     96      4    96%
     ```
 
 - Web-App Coverage:
