@@ -4,8 +4,13 @@
 [![Machine-Learning-Client CI](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/ml_client_test.yml/badge.svg)](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/ml_client_test.yml) 
 [![Build and Deploy (CD)](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/build_and_deploy.yml/badge.svg)](https://github.com/software-students-fall2023/5-final-project-jungle-gap/actions/workflows/build_and_deploy.yml) 
 
+## Container Images
+Our container images are hosted on [DockerHub](https://hub.docker.com/). Click the following link to view our web-app's image and machine-learning-client's image respectively:
+- [web-app](https://hub.docker.com/r/isomorphismss/web_app)
+- [machine-learning-client](https://hub.docker.com/r/isomorphismss/ml_client)
+
 ## Introduction
-Our Audio Transcription Service allows you to either record your own audio or upload an existing audio file. We will then provide you with an English transcription and sentiment polarity analysis of the content.
+Our Face Recognition Service offers a user-friendly interface for either capturing a selfie or uploading a pre-existing image. Once you submit your photo, we will process it, identifying and highlighting each human face with a distinct red box.
 
 ## Team Members
 - [Jiasheng Wang](https://github.com/isomorphismss)
@@ -103,4 +108,5 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
 
 ### Prerequisites
 - Ensure you have [Python](https://www.python.org/downloads/) 3.12 installed on your system.
-- The application also depends on [gcc/g++ (C/C++ compiler)]() and [cmake](https://cmake.org/download/)
+- The application also depends on [gcc/g++](https://gcc.gnu.org/) and [cmake](https://cmake.org/download/). If you don't already have these installed on your computer, you may choose your preferred method of installation. Alternatively, you can follow the instructions provided below for a guided setup:
+
