@@ -6,8 +6,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: Isomorphism
       MONGO_INITDB_ROOT_PASSWORD: d6wjgdhwddy
-    ports: 
-      - "27017:27017"
 
   webapp:
     image: isomorphismss/web_app:latest
