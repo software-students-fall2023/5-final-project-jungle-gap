@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Face Recognition Service</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="/">Home</a>
+      {% if session.logged_in %}
+        <span>Welcome, {{ session.user.username }}!</span>
+        <a href="/archive">Archive</a>
+        <form method="POST" action="/user/signout" style="display: inline;">
+          <button type="submit" class="signout-btn">Sign Out</button>
+        </form>
+      {% else %}
+        <a href="/login">Log In</a>
+        <a href="/signup">Sign Up</a>
+      {% endif %}
+    </nav>
+    <main>{% block container %}{% endblock %}</main>
+  </div>
+  {% block scripts %}
+  {% endblock scripts %}
+</body>
+</html>

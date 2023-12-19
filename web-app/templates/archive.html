@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<div class="archive-container">
+  <h1>Images Archive</h1>
+  {% for image in images %}
+  <div class="archive-entry-container">
+    <div class="image-container">
+      <p>Original:</p>
+      <img src="{{server_url}}:7001/image/{{image.filename}}">
+    </div>
+    <div class="image-container">
+      <p>Recognized:</p>
+      <img src="{{server_url}}:7001/edited-image/{{image.filename}}">
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

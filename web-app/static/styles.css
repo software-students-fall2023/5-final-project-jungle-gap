@@ -1,0 +1,250 @@
+/* Enhanced Base Styles */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e8f0fe;
+  color: #454545;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  color: #355c7d;
+  text-align: center;
+}
+
+/* Archive Styling */
+.archive-container {
+  width: 90%;
+  margin: auto;
+}
+
+.archive-entry-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  border: 2px solid #c06c84;
+  padding: 20px;
+  background-color: #f8f1f1;
+  border-radius: 15px;
+}
+
+.image-container {
+  flex-basis: 45%;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Enhanced Navigation Styles */
+nav {
+  background-color: #6c5b7b;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+nav a, nav form button {
+  color: white;
+  margin-left: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover, nav form button:hover {
+  color: #503b63;
+}
+
+/* Main Container */
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 25px;
+}
+
+/* Upload Container */
+.upload-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+/* Styling for Submit Button */
+.submit-btn {
+  width: 180px;
+  padding: 15px 25px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c06c84;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #a2566f;
+}
+
+/* Audio Capture Buttons */
+.audio-capture-container button {
+  background-color: #6c5b7b;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 15px;
+  transition: background-color 0.3s;
+}
+
+.audio-capture-container button:hover {
+  background-color: #503b63;
+}
+
+.audio-capture-container button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  color: #666666;
+}
+
+/* Error and Processing Status Styling */
+.error-status, .processing-status {
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.error-status {
+  color: #ff3860;
+}
+
+.processing-status {
+  color: #6c5b7b;
+}
+
+/* File Input and Upload Button */
+#upload-form input[type="file"] {
+  margin-bottom: 20px;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 12px 25px;
+  border: 1px solid #8a8484;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.file-input-label:hover {
+  background-color: #b8b0b0;
+}
+
+/* Response Message Styling */
+#response-message img {
+  max-width: 400px; /* Adjust as needed */
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+  .container, .upload-container {
+    width: 95%;
+    margin: 20px auto;
+  }
+  .archive-entry-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  #upload-form input[type="file"] {
+    width: 100%;
+  }
+}
+
+/* Sign Out Button */
+.signout-btn {
+  background-color: #ff5c5c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.signout-btn:hover {
+  background-color: #e64545;
+}
+
+/* File Input and File Name Display */
+#upload-form input[type="file"] {
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+.file-input-label {
+  display: block; /* Keep as block */
+  padding: 10px 20px;
+  margin: 10px auto; /* Set top/bottom margin and auto for left/right */
+  border: 1px solid #8a8484;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  width: 20%;
+  cursor: pointer;
+}
+
+.file-input-label:hover {
+  background-color: #b8b0b0;
+}
+
+#file-chosen {
+  display: block; /* Changed from inline-block to block */
+  margin-bottom: 20px; /* Added margin-bottom for spacing */
+  font-size: 0.9rem;
+}
+
+/* Sign In and Sign Up Form Styling */
+.upload-container form h2 {
+  margin-top: 20px;
+  color: #355c7d;
+}
+
+.upload-container input[type="text"],
+.upload-container input[type="password"] {
+  width: 30%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Error Message Styling */
+.error {
+  color: #ff3860;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
