@@ -108,7 +108,7 @@ Our project uses `pytest` (for the machine-learning-client) and `pytest-flask` (
 
 ### Prerequisites
 - Ensure you have [Python](https://www.python.org/downloads/) 3.12 installed on your system.
-- The application also depends on [gcc/g++](https://gcc.gnu.org/) and [cmake](https://cmake.org/download/). If you don't already have these installed on your computer, you may choose your preferred method of installation. Alternatively, you can follow the instructions provided below for a guided setup:
+- The application also depends on [gcc/g++](https://gcc.gnu.org/) and [cmake](https://cmake.org/download/). While they are already included in the Dockerfile, and thus not required for Docker-based runs, you will need to install it locally for local testing. If you don't already have these installed on your computer, you may choose your preferred method of installation. Alternatively, you can follow the instructions provided below for a guided setup:
 
     - Windows:
 
@@ -216,7 +216,7 @@ To view a detailed HTML report showing lines covered and missed:
 pipenv run coverage html
 ```
 
-### Test Coverage Report (as of 12/17/2023, reported by Github Action)
+### Test Coverage Report (as of 12/18/2023, reported by Github Action)
 - Machine-Learning-Client Coverage:
 
     ```shell
